@@ -4,7 +4,7 @@
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	3.5.0
+Version:	3.5.1
 Release:	1
 Group:		System/Libraries
 License:	BSD
@@ -14,7 +14,6 @@ Source0:	http://www.canonware.com/download/jemalloc/%{name}-%{version}.tar.bz2
 Patch0:		jemalloc-3.5.0-no_pprof.patch
 # ARMv5tel has no atomic operations
 Patch1:		jemalloc-armv5-force-atomic.patch
-Patch2:		jemalloc-3.5.0-flawed_tests.diff
 BuildRequires:	xsltproc
 
 %description
@@ -40,11 +39,8 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-
 %setup -q
-%patch0 -p1
-%patch1 -p1 -b .armv5tel
-%patch2 -p1
+%apply_patches
 
 %build
 export LC_ALL=C
