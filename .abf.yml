@@ -1,4 +1,5 @@
 removed_sources:
   jemalloc-3.5.0.tar.bz2: 3c6aeed5adbd7267ec7db476f002051143a43ac0
-sources:
   jemalloc-3.5.1.tar.bz2: c8bf1365baf045c47b780fd837f94b4020b741ed
+sources:
+  jemalloc-3.6.0.tar.bz2: 40c0892b172e5dc14a6cea6fe4edda7dea4f3a68
