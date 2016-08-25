@@ -1,19 +1,15 @@
-%define major 1
+%define major 2
 %define libname %mklibname jemalloc %{major}
 %define develname %mklibname -d jemalloc
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	3.6.0
-Release:	7
+Version:	4.2.1
+Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
 Source0:	http://www.canonware.com/download/jemalloc/%{name}-%{version}.tar.bz2
-# Remove pprof, as it already exists in google-perftools
-Patch0:		jemalloc-3.5.0-no_pprof.patch
-# ARMv5tel has no atomic operations
-Patch1:		jemalloc-armv5-force-atomic.patch
 BuildRequires:	xsltproc
 
 %description
@@ -45,7 +41,7 @@ developing applications that use %{name}.
 %build
 export LC_ALL=C
 export CFLAGS="%{optflags} -std=gnu99"
-%configure2_5x
+%configure
 %make
 
 %check
@@ -59,14 +55,20 @@ rm %{buildroot}%{_datadir}/doc/%{name}/jemalloc.html
 
 # None of these in fedora
 find %{buildroot}%{_libdir}/ -name '*.a' -exec rm -vf {} ';'
+mv %{buildroot}%{_bindir}/jemalloc.sh %{buildroot}%{_bindir}/jemalloc
+
+%files
+%{_bindir}/jemalloc
+%{_bindir}/jeprof
+%{_mandir}/man3/jemalloc.3*
 
 %files -n %{libname}
-%doc COPYING README VERSION
-%doc doc/jemalloc.html
 %{_libdir}/libjemalloc.so.%{major}*
-%{_bindir}/jemalloc.sh
 
 %files -n %{develname}
+%doc COPYING README VERSION
+%doc doc/jemalloc.html
+%{_bindir}/jemalloc-config
 %{_includedir}/jemalloc
 %{_libdir}/libjemalloc.so
-%{_mandir}/man3/jemalloc.3*
+%{_libdir}/pkgconfig/%{name}.pc
