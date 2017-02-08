@@ -4,12 +4,12 @@
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	4.2.1
+Version:	4.4.0
 Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
-Source0:	http://www.canonware.com/download/jemalloc/%{name}-%{version}.tar.bz2
+Source0:	https://github.com/jemalloc/jemalloc/releases/download/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	xsltproc
 
 %description
