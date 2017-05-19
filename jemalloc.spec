@@ -4,7 +4,7 @@
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	4.4.0
+Version:	4.5.0
 Release:	1
 Group:		System/Libraries
 License:	BSD
