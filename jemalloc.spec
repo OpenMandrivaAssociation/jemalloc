@@ -39,7 +39,7 @@ developing applications that use %{name}.
 %apply_patches
 
 %build
-%global optflags %{optflags} -O3
+#global optflags %{optflags} -O3
 
 export LC_ALL=C
 export CFLAGS="%{optflags} -std=gnu99"
