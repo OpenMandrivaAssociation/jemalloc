@@ -2,10 +2,13 @@
 %define libname %mklibname jemalloc %{major}
 %define develname %mklibname -d jemalloc
 
+# (tpg) optimize it a bit
+%global optflags %optflags -Ofast
+
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
 Version:	5.0.1
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
@@ -39,8 +42,6 @@ developing applications that use %{name}.
 %apply_patches
 
 %build
-#global optflags %{optflags} -O3
-
 export LC_ALL=C
 export CFLAGS="%{optflags} -std=gnu99"
 %configure
