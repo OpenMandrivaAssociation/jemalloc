@@ -43,8 +43,8 @@ developing applications that use %{name}.
 
 %build
 export LC_ALL=C
-export CFLAGS="%{optflags} -std=gnu99"
-%configure
+#export CFLAGS="%{optflags} -std=gnu99"
+configure
 %make
 
 %check
