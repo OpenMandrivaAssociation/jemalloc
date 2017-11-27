@@ -1,11 +1,16 @@
 %define major 2
 %define libname %mklibname jemalloc %{major}
 %define develname %mklibname -d jemalloc
+# (tpg) https://github.com/jemalloc/jemalloc/issues/1057
+%define _disable_lto 1
+
+# (tpg) optimize it a bit
+%global optflags %optflags -Ofast
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	4.4.0
-Release:	1
+Version:	5.0.1
+Release:	2
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
@@ -40,7 +45,6 @@ developing applications that use %{name}.
 
 %build
 export LC_ALL=C
-export CFLAGS="%{optflags} -std=gnu99"
 %configure
 %make
 
@@ -51,7 +55,7 @@ make check
 %makeinstall_std
 
 # Install this with doc macro instead
-rm %{buildroot}%{_datadir}/doc/%{name}/jemalloc.html
+rm -rf %{buildroot}%{_datadir}/doc/%{name}/jemalloc.html
 
 # None of these in fedora
 find %{buildroot}%{_libdir}/ -name '*.a' -exec rm -vf {} ';'
