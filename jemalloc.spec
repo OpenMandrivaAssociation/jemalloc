@@ -10,7 +10,7 @@
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
 Version:	5.0.1
-Release:	2
+Release:	3
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
