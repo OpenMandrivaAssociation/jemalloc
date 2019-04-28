@@ -5,17 +5,18 @@
 %define _disable_lto 1
 
 # (tpg) optimize it a bit
-%global optflags %optflags -Ofast
+%global optflags %optflags -O3
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	5.1.0
-Release:	2
+Version:	5.2.0
+Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
 Source0:	https://github.com/jemalloc/jemalloc/releases/download/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	xsltproc
+Requires:	%{libname} = %{EVRD}
 
 %description
 General-purpose scalable concurrent malloc(3) implementation.
@@ -29,6 +30,12 @@ Group:		System/Libraries
 General-purpose scalable concurrent malloc(3) implementation.
 This distribution is the stand-alone "portable" implementation of %{name}.
 
+If you want to use jemalloc as default malloc(3) implementation on your
+system follow below:
+
+1. create /etc/ld.so.preload
+2. add to that file %{_libdir}/libjemalloc.so.%{major}
+
 %package -n %{develname}
 Summary:	Development files for %{name}
 Group:		Development/C
@@ -40,19 +47,18 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 export LC_ALL=C
 %configure
-%make
+%make_build
 
 %check
 make check
 
 %install
-%makeinstall_std
+%make_install
 
 # Install this with doc macro instead
 rm -rf %{buildroot}%{_datadir}/doc/%{name}/jemalloc.html
