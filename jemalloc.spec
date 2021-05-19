@@ -1,16 +1,14 @@
 %define major 2
 %define libname %mklibname jemalloc %{major}
 %define develname %mklibname -d jemalloc
-# (tpg) https://github.com/jemalloc/jemalloc/issues/1057
-%define _disable_lto 1
 
 # (tpg) optimize it a bit
-%global optflags %optflags -O3
+%global optflags %{optflags} -O3
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
 Version:	5.2.1
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
@@ -50,8 +48,18 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
+# (tpg) set --with-lg-pagesize to 4K (2^12) on x86 for performance, and set it to 64K (2^16) for other arches
+# (tpg) set -- with-lg-hugepage=21 to some default value, rather than guessing it based on current build node
+
 export LC_ALL=C
-%configure
+%configure \
+%ifarch %{armx} %{riscv}
+	--with-lg-page=16 \
+%else
+	--with-lg-page=12 \
+%endif
+	--with-lg-hugepage=21
+
 %make_build
 
 %check
