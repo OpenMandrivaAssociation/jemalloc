@@ -2,18 +2,13 @@
 %define libname %mklibname jemalloc %{major}
 %define develname %mklibname -d jemalloc
 
-# (tpg) 2021-05-18
-# thd_start:test/unit/prof_accum.c:36: Failed assertion: (jet_mallctl("prof.dump", ((void*)0), ((void*)0), ((void*)0), 0)) == (0) --> 14 != 0: Unexpected error while dumping heap profile
-# test/test.sh: line 34: 10095 Segmentation fault      (core dumped) $JEMALLOC_TEST_PREFIX ${t} /builddir/build/BUILD/jemalloc-5.2.1/ /builddir/build/BUILD/jemalloc-5.2.1/
-%define _disable_lto 1
-
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3
 
 Summary:	General-purpose scalable concurrent malloc implementation
 Name:		jemalloc
-Version:	5.2.1
-Release:	2
+Version:	5.3.0
+Release:	1
 Group:		System/Libraries
 License:	BSD
 URL:		http://www.canonware.com/jemalloc/
@@ -90,7 +85,7 @@ sed -i -e "s/^Version:.*/Version: %{version}/g" %{buildroot}%{_libdir}/pkgconfig
 %files
 %{_bindir}/jemalloc
 %{_bindir}/jeprof
-%{_mandir}/man3/jemalloc.3*
+%doc %{_mandir}/man3/jemalloc.3*
 
 %files -n %{libname}
 %{_libdir}/libjemalloc.so.%{major}*
