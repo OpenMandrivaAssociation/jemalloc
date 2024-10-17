@@ -11,7 +11,7 @@ Version:	5.3.0
 Release:	2
 Group:		System/Libraries
 License:	BSD
-URL:		http://www.canonware.com/jemalloc/
+URL:		https://www.canonware.com/jemalloc/
 Source0:	https://github.com/jemalloc/jemalloc/releases/download/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	xsltproc
 Requires:	%{libname} = %{EVRD}
