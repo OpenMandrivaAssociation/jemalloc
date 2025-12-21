@@ -13,6 +13,11 @@ Group:		System/Libraries
 License:	BSD
 URL:		https://www.canonware.com/jemalloc/
 Source0:	https://github.com/jemalloc/jemalloc/releases/download/%{version}/%{name}-%{version}.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	xsltproc
 Requires:	%{libname} = %{EVRD}
 
