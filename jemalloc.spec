@@ -13,6 +13,8 @@ Group:		System/Libraries
 License:	BSD
 URL:		https://www.canonware.com/jemalloc/
 Source0:	https://github.com/jemalloc/jemalloc/releases/download/%{version}/%{name}-%{version}.tar.bz2
+# GCC 16 moved std::__throw_bad_alloc() out of <new>/functexcept.h
+Patch0:		jemalloc-5.3.1-gcc16-throw-bad-alloc.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
