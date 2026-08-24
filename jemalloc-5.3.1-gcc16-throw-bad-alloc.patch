@@ -1,11 +1,11 @@
 --- jemalloc-5.3.1/src/jemalloc_cpp.cpp
 +++ jemalloc-5.3.1/src/jemalloc_cpp.cpp
 @@ -100,7 +100,7 @@
+ 	}
+
+ 	if (ptr == nullptr && !nothrow)
+-		std::__throw_bad_alloc();
++		throw std::bad_alloc();
+ 	return ptr;
  }
- 
- if (ptr == nullptr && !nothrow)
--std::__throw_bad_alloc();
-+throw std::bad_alloc();
- return ptr;
- }
- 
+
